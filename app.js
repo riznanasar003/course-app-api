@@ -9,7 +9,7 @@ app.use(express.json())
 
 mongoose.connect("mongodb+srv://rizna10:rizna2003@cluster0.u7ke2.mongodb.net/coursedb?retryWrites=true&w=majority&appName=Cluster0")
 
-app.post("/add",(req,res)=>{
+app.post("/add",(req,res)=>{    
     let input = req.body
     //console.log(input)
     let course = new coursemodel(input)
@@ -29,8 +29,17 @@ app.get("/viewall",(req,res)=>{
     )
 })
 
-app.get("/seacrh",(req,res)=>{
-    res.send("search")
+app.post("/search",(req,res)=>{
+    let input = req.body
+    coursemodel.find(input).then(
+        (data)=>{
+            res.json(data)
+        }
+    ).catch(
+        (error)=>{
+            res.json
+        }
+    )
 })
 
 app.get("/delete",(req,res)=>{
